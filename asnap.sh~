@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#asnap provides incremental rotating snapsots of folders using rsync
+
+#read config file
+
+#check for jearly rotation
+
+#check for monthly rotation
+
+#check for weekly rotation
+
+#check for daily rotation
+
+#delete old hourly snapshots
+
+#perform hourly snapshot
