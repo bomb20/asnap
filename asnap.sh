@@ -18,3 +18,4 @@ cp -al ${snapfolder}/${lastsnap} ${snapfolder}/${tstamp}
 rsync -vau --delete --include-from=$includefile --exclude-from=$excludefile ${sourcefolder}/ $snapfolder
 
 #perform delete operations
+
