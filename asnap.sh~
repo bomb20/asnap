@@ -1,17 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-#asnap provides incremental rotating snapsots of folders using rsync
+snapfolder="/home/vincent/asnap"
 
-#read config file
-
-#check for jearly rotation
-
-#check for monthly rotation
-
-#check for weekly rotation
-
-#check for daily rotation
-
-#delete old hourly snapshots
-
-#perform hourly snapshot
+#read datestamp of last snapshot
+lastsnap=`tail -n 1 ${snapfolder}/.asnap.journal`
+#write actual timestamp
+tstamp=`date +%Y%V%m%d%H%M%S`
+echo "$tstamp" >> ${snapfolder}/.asnap.journal
+#copy last Snapshot into new one
+cp -al ${snapfolder}/${lastsnap} ${snapfolder}/$tstamp

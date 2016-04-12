@@ -1,29 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 
-#asnap provides incremental rotating snapsots of folders using rsync
+sourcefolder="/home/vincent"
+snapfolder="/home/vincent/vault/asnap"
+includefile="/home/vincent/.asnap_include"
+excludefile="/home/vincent/.asnap_exclude"
+#read datestamp of last snapshot
+lastsnap=`tail -n 1 ${snapfolder}/asnap.journal`
 
-##Config Section
+#write actual timestamp
+tstamp=`date +%Y%V%m%d%H%M%S`
+echo "$tstamp" >> ${snapfolder}/.asnap.journal
+#copy last Snapshot into new one
+cp -al ${snapfolder}/${lastsnap} ${snapfolder}/${tstamp}
 
+#perform actual Snapshot
 
-#Get current Timestamp
+rsync -vau --delete --include-from=$includefile --exclude-from=$excludefile ${sourcefolder}/ $snapfolder
 
-
-#check for jearly rotation
-
-#check for monthly rotation
-
-#check for weekly rotation
-
-#check for daily rotation
-
-#check for hourly rotation
-
-#determine if last snapshot is present
-
-#perform hourly snapshot
-if ($LastPresent == true do){
-	cp -al $SnapshotDir/$LastSnapshot/ $SnapshotDir/$TimeStamp/;
-	rsync -valuz --delete --include-from="./includes" --exclude-from="excludes" $BackupDir/ $SnapshotDir/$TimeStamp/;
-}
-
-
+#perform delete operations
